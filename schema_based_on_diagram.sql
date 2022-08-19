@@ -31,6 +31,14 @@ CREATE TABLE treatments(
   name varchar(255),
 );
 
+CREATE TABLE medical_histories_has_treatments(
+  medical_history_id int NOT NULL REFERENCES medical_histories(id),
+  treatment_id int NOT NULL REFERENCES treatments(id),
+  PRIMARY KEY (medical_history_id, treatment_id)
+);
+
+CREATE INDEX ON medical_histories_has_treatments (medical_history_id);
+CREATE INDEX ON medical_histories_has_treatments (treatment_id);
 CREATE INDEX ON medical_histories (patient_id);
 CREATE INDEX ON invoices (medical_history_id);
 CREATE INDEX ON invoice_items (invoice_id);
